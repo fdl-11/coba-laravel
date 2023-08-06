@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main')    {{-- layout about akan mewarisi layout main --}}
 
 @section('container')
     <h1>Halaman About</h1>
