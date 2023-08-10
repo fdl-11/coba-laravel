@@ -13,5 +13,5 @@
             <p>{{ $post->excerpt }}</p>
         </article>
     @endforeach
-
+    <h6><a href="../categories">See all categories</a></h6>
 @endsection
