@@ -9,7 +9,7 @@
             <h2>
                 <a href="/posts/{{ $post->slug }}">{{ $post->title }}</a>
             </h2>
-            <h6>by {{ $post->author }}</h6>
+            <h6>by <a href="#" class="text-decoration-none">{{ $post->user->name }}</a></h6>
             <p>{{ $post->excerpt }}</p>
         </article>
     @endforeach
