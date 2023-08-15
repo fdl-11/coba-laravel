@@ -16,7 +16,7 @@ class PostController extends Controller
         return view('posts', [
             "title" => "All Post",
             // "posts" => Post::all()
-            "posts" => Post::with(['author', 'category'])->latest()->get()
+            "posts" => Post::with(['author', 'category'])->latest()->get()  // with = eager loading
         ]);
     }
 
@@ -70,7 +70,7 @@ class PostController extends Controller
     {
         return view('posts', [
             'title' => "Post by Author : $author->name",
-            'posts' => $author->posts->load(['category', 'author'])
+            'posts' => $author->posts->load(['category', 'author'])     // load = lazy eager loading
         ]);
     }
 }
