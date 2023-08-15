@@ -14,9 +14,9 @@ class PostController extends Controller
     public function index()
     {
         return view('posts', [
-            "title" => "Posts",
+            "title" => "All Post",
             // "posts" => Post::all()
-            "posts" => Post::latest()->get()
+            "posts" => Post::with(['author', 'category'])->latest()->get()
         ]);
     }
 
@@ -59,10 +59,9 @@ class PostController extends Controller
 
     public function category(Category $category)
     {
-        return view('category', [
-            'title' => $category->name,
-            'posts' => $category->posts,
-            'category' => $category->name
+        return view('posts', [
+            'title' => "Post by Category : $category->name",
+            'posts' => $category->posts->load(['category', 'author'])
         ]);
     }
 
@@ -70,8 +69,8 @@ class PostController extends Controller
     public function author(User $author)
     {
         return view('posts', [
-            'title' => 'User Post',
-            'posts' => $author->posts
+            'title' => "Post by Author : $author->name",
+            'posts' => $author->posts->load(['category', 'author'])
         ]);
     }
 }
