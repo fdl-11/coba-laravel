@@ -15,6 +15,7 @@ class PostController extends Controller
     {
         return view('posts', [
             "title" => "All Post",
+            "active" => "posts",
             // "posts" => Post::all()
             "posts" => Post::latest()->get()  // with = eager loading
         ]);
@@ -25,6 +26,7 @@ class PostController extends Controller
     {
         return view('post', [
             "title" => "Single Post",
+            "active" => "posts",
             "post" => $post
         ]);
     }
@@ -34,6 +36,7 @@ class PostController extends Controller
     {
         return view('about', [
             "title" => "About",
+            "active" => "about",
             "name" => "Fadli Darusalam",
             "email" => "fadlidarusalam11@gmail.com",
             "image" => "firmino.jpg"
@@ -44,6 +47,7 @@ class PostController extends Controller
     public function home()
     {
         return view('home', [
+            "active" => "home",
             "title" => "Home"
         ]);
     }
@@ -53,6 +57,7 @@ class PostController extends Controller
     {
         return view('categories', [
             'title' => 'Post Categories',
+            "active" => "categories",
             'categories' => Category::all()
         ]);
     }
@@ -61,6 +66,7 @@ class PostController extends Controller
     {
         return view('posts', [
             'title' => "Post by Category : $category->name",
+            "active" => "categories",
             'posts' => $category->posts->load(['category', 'author'])
         ]);
     }
@@ -70,6 +76,7 @@ class PostController extends Controller
     {
         return view('posts', [
             'title' => "Post by Author : $author->name",
+            'active' => "posts",
             'posts' => $author->posts->load(['category', 'author'])     // load = lazy eager loading
         ]);
     }
