@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
@@ -24,6 +25,12 @@ Route::get('/categories', [PostController::class, 'categories']);
 // Route::get('/categories/{category:slug}',[PostController::class, 'category']);
 // Route::get('/authors/{author:username}', [PostController::class, 'author']);
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
+// name('login') berfungsi menamai route. ketika user mencoba mengakses halaman yang private (misal dashboard namun blm login), akan diredirect ke view login (app/Http/middleware/Authenticate.php)
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
