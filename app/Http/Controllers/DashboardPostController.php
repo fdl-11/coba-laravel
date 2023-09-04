@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class DashboardPostController extends Controller
@@ -13,6 +14,7 @@ class DashboardPostController extends Controller
     public function index()
     {
         // Halaman dashboard post
+        // Menampilkan data (READ)
         return view('dashboard.posts.index', [
             'posts' => Post::where('user_id', auth()->user()->id)->get()
         ]);
@@ -23,7 +25,10 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        //
+        // Menambahkan data (CREATE)
+        return view('dashboard.posts.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -39,7 +44,7 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        // Menampilkan data spesifik tiap post (READ)
         return view('dashboard.posts.show', [
             'post' => $post
         ]);
