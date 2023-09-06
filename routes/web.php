@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardPostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +39,10 @@ Route::get('/dashboard', function() {
 } )->middleware('auth');
 
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+
+// show tidak bisa diakses, karena tidak dipakai
+Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('admin');   // Otorisasi dengan middleware (didefinisikan di route)
+// Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show');   // Otorisasi dengan gate (didefinisikan di controller)
+
+// Middleware lebih mudah, namun kurang fleksibel (tidak bisa digunakan di view)
+// Gate lebih fleksibel, dapat digunakan di view
